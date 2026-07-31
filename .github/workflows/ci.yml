@@ -1,0 +1,63 @@
+# Généré par Amorce (brique : ci). Modifiez-le depuis le tableau de bord de l'équipe : une édition manuelle ici sera écrasée au prochain push.
+
+# Workflow CI généré par Amorce (preset rails_monolithe).
+# Le job `lint` fait ÉCHOUER la CI si les standards ne sont pas tenus.
+# Le job `revue_bot` (reviewdog) commente les écarts directement sur la PR.
+# Pour le désactiver : supprimer le job ci-dessous (voir docs/HYGIENE_CODE.md).
+name: CI
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+      - run: bundle exec rubocop
+  ci:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - "5432:5432"
+        options: --health-cmd="pg_isready" --health-interval=10s --health-timeout=5s --health-retries=5
+    env:
+      RAILS_ENV: test
+      DATABASE_URL: postgres://postgres:postgres@localhost:5432/app_test
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+      - run: bin/rails db:prepare
+      - run: bundle exec rspec
+  revue_bot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    if: github.event_name == 'pull_request'
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+      - name: RuboCop en commentaires de revue
+        uses: reviewdog/action-rubocop@v2
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          reporter: github-pr-review
+          filter_mode: added
+          fail_level: none
+          rubocop_version: "gemfile"
+          rubocop_extensions: ""
