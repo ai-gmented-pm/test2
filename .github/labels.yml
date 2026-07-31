@@ -1,0 +1,18 @@
+# Généré par Amorce (brique : scaffolding_github). Modifiez-le depuis le tableau de bord de l'équipe : une édition manuelle ici sera écrasée au prochain push.
+
+# Labels du repo — importables avec github-label-sync ou à créer à la main.
+- name: P1
+  color: "b60205"
+  description: "Indispensable pour la démo — à faire en premier"
+- name: P2
+  color: "d93f0b"
+  description: "Important, après les P1"
+- name: P3
+  color: "fbca04"
+  description: "Bonus si le temps le permet"
+- name: bug
+  color: "d73a4a"
+  description: "Quelque chose ne marche pas"
+- name: tech-debt
+  color: "c5def5"
+  description: "Dette technique assumée, à rembourser"
