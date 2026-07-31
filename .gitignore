@@ -1,0 +1,30 @@
+# Généré par Amorce (brique : boilerplate). Modifiez-le depuis le tableau de bord de l'équipe : une édition manuelle ici sera écrasée au prochain push.
+
+# .gitignore du projet — socle commun + entrées de la stack (Ruby).
+
+# Système
+.DS_Store
+Thumbs.db
+
+# Secrets — jamais commités, seul .env.example l'est
+.env
+.env.*
+!.env.example
+
+# Éditeurs
+.idea/
+.vscode/
+*.swp
+
+# Dépendances et journaux
+node_modules/
+*.log
+
+# Rails
+/config/master.key
+/config/credentials/*.key
+/tmp/*
+/log/*
+/storage/*
+/public/assets
+.byebug_history
