@@ -1,0 +1,26 @@
+# Généré par Amorce (brique : boilerplate). Modifiez-le depuis le tableau de bord de l'équipe : une édition manuelle ici sera écrasée au prochain push.
+
+<%# Balises meta du projet — à rendre dans le <head> du layout de l'application
+    avec render "layouts/meta". Chaque page peut surcharger le titre et la
+    description via content_for(:titre) et content_for(:description).
+    Les images (favicon.svg, og-image.png) sont servies depuis public/. %>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#1f6feb">
+
+<title><%= content_for(:titre) || "Le projet" %></title>
+<meta name='description' content='<%= content_for(:description) || "Le projet — application web pour gérer article." %>'>
+<link rel="canonical" href="<%= request.original_url %>">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+
+<%# Partage sur les réseaux et les messageries. %>
+<meta property='og:type' content='website'>
+<meta property='og:site_name' content='Le projet'>
+<meta property='og:title' content='<%= content_for(:titre) || "Le projet" %>'>
+<meta property='og:description' content='<%= content_for(:description) || "Le projet — application web pour gérer article." %>'>
+<meta property='og:url' content='<%= request.original_url %>'>
+<meta property='og:image' content='<%= request.base_url %>/og-image.png'>
+<meta name='twitter:card' content='summary_large_image'>
+<meta name='twitter:title' content='<%= content_for(:titre) || "Le projet" %>'>
+<meta name='twitter:description' content='<%= content_for(:description) || "Le projet — application web pour gérer article." %>'>
+<meta name='twitter:image' content='<%= request.base_url %>/og-image.png'>
