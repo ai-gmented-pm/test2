@@ -1,0 +1,45 @@
+# Généré par Amorce (brique : hygiene_code). Modifiez-le depuis le tableau de bord de l'équipe : une édition manuelle ici sera écrasée au prochain push.
+
+# Retirez `inherit_gem` si `rubocop-rails-omakase` n'est pas au Gemfile.
+inherit_gem:
+  rubocop-rails-omakase: rubocop.yml
+
+AllCops:
+  NewCops: enable
+  Exclude:
+    - "db/schema.rb"
+    - "bin/**/*"
+    - "vendor/**/*"
+    - "node_modules/**/*"
+
+# Commentaires : le pourquoi, pas le quoi
+Style/CommentedKeyword:
+  Enabled: true
+Layout/LeadingCommentSpace:
+  Enabled: true
+
+# Nommage intentionnel
+Naming/MethodParameterName:
+  MinNameLength: 3
+Naming/VariableNumber:
+  Enabled: true
+
+# Fonctions courtes, une responsabilité
+Metrics/MethodLength:
+  Max: 15
+Metrics/AbcSize:
+  Max: 20
+Metrics/BlockNesting:
+  Max: 2
+
+# Pas de code mort commité
+Lint/UselessAssignment:
+  Enabled: true
+Lint/UnusedMethodArgument:
+  Enabled: true
+Lint/Debugger:
+  Enabled: true
+
+# TODO datés et nominatifs
+Style/CommentAnnotation:
+  Enabled: true
